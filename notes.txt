@@ -1,0 +1,14 @@
+Shelfie
+	- amazon api
+	- google books
+	- for book in library
+	- type in book title
+	- get back book
+	- rank by shared commonality
+	- upload photo to server
+	- ocr
+	- query database
+	- return link to purchase
+
+Server
+	- webpage
