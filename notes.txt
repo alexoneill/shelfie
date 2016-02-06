@@ -10,6 +10,8 @@ Shelfie
 	- query database
 	- return link to purchase
 
+Users want Russian texts
+
 Send pic to server
 server sends number(, pin)
 
