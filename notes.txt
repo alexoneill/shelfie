@@ -10,5 +10,19 @@ Shelfie
 	- query database
 	- return link to purchase
 
-Server
-	- webpage
+Send pic to server
+server sends number(, pin)
+
+Shelfie
+1) mobile app
+2) server
+	- book name to recommended books (1)
+	- OCR shit
+	- Amazon Product Advertising API / Google Books
+	1) OCR to get books and titles
+	2) book recommends (n)
+	3) pick random book (weighted by freq)
+	4) return to user link to Amazon to buy,
+	   or partial preview on google books (if available)
+	5) synopsis
+	6) server should log prior requests (ML!!!)
