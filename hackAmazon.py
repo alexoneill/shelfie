@@ -9,8 +9,30 @@ import urllib
 
 # for e in soup.find_all(class_="a-link-normal s-access-detail-page  a-text-normal"):
 # 	print e["title"]
-isbn = 99999
-urlt = 'http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords=%d&rh=n%3A283155%2Ck%3A%d'%(isbn,isbn)
-print urlt
-#http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords=9780553900347&rh=n%3A283155%2Ck%3A9780553900347
-# def 
+
+# def amazonResults(isbn):
+# 	# isbn = '9780545670319'
+# 	url = 'http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords='+str(isbn)+'&rh=n%3A283155%2Ck%3A'+str(isbn)
+# 	r = urllib.urlopen(url).read()
+# 	soup = BeautifulSoup(r)
+# 	return soup
+
+isbn = '9780545670319'
+url = 'http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dstripbooks&field-keywords='+str(isbn)+'&rh=n%3A283155%2Ck%3A'+str(isbn)
+r = urllib.urlopen(url).read()
+soup = BeautifulSoup(r)
+# print soup.prettify()
+# <h2 class="a-size-medium a-color-null s-inline s-access-title a-text-normal">The Hunger Games Trilogy: The Hunger Games / Catching Fire / Mockingjay</h2>
+res = soup.find(class_="a-size-medium a-color-null s-inline s-access-title a-text-normal")
+itemTitle = res.contents
+link = res.parent["href"]
+print itemTitle
+print link
+
+r = urllib.urlopen(link).read()
+soup = BeautifulSoup(r)
+res = soup.find(class_="a-carousel-card a-float-left")
+print res.prettify()
+print '='*50
+for e in res.find_all('a'):
+	print '- %s'%e
