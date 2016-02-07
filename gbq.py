@@ -3,6 +3,7 @@ import pprint
 from apiclient.discovery import build
 import httplib2
 import hackAmazon as ha
+import sys
 
 
 api_key = 'AIzaSyBhtLjbQ5F3XoqEElobXVsNhpPf3nkR3WU'
@@ -23,9 +24,9 @@ except Exception, e:
 #	bvi['pageCount']
 def topNQueries(q,N=1):
 	if N<1:
-		n = 1
+		N = 1
 	if N>5:
-		n = 5
+		N = 5
 	result = []
 	request = service.volumes().list(source='public', q=q, maxResults=3)
 	response = request.execute()
@@ -55,7 +56,7 @@ def topNQueries(q,N=1):
   	return result
 
 def suggest(q):
-	f = open('reco_%s.txt'%('_'.join(q.split())),'w')
+	f = sys.stdout#('reco_%s.txt'%('_'.join(q.split())),'w')
 	for result in topNQueries(q):
 		# print result
 		# print '='*50
@@ -70,6 +71,8 @@ def suggest(q):
 			# print '\t(%s)'%bk[2]
 			f.write('\n\t- \"%s\" by %s\n'%(bk[0],bk[1]))
 			f.write('\t (%s)\n'%bk[2])
-	f.close()
+	# f.close()
 
-suggest('romeo and juliet')
+query = ' '.join(sys.argv[1:])
+print 'Searching for recommendations based on \"%s\"...'%query
+suggest(' '.join(sys.argv[1:]))
