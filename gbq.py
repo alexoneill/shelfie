@@ -57,6 +57,7 @@ def topNQueries(q,N=1):
 
 def suggest(q):
 	f = sys.stdout#('reco_%s.txt'%('_'.join(q.split())),'w')
+	g = open('mrr.txt','w') #most recent recommendations
 	for result in topNQueries(q):
 		# print result
 		# print '='*50
@@ -66,11 +67,15 @@ def suggest(q):
 		if reco[1] == None:
 			continue
 		f.write('If you like \"%s\" by %s, you should read:\n'%(result[0],result[1]))
+		g.write('%s\n%s\n\n'%(result[0],result[1]))
 		for bk in reco[1]:
 			# print '\t- \"%s\" by %s'%(bk[0],bk[1])
 			# print '\t(%s)'%bk[2]
 			f.write('\n\t- \"%s\" by %s\n'%(bk[0],bk[1]))
 			f.write('\t (%s)\n'%bk[2])
+			g.write('%s\n'%bk[0])
+			g.write('%s\n'%bk[1])
+			g.write('%s\n\n'%bk[2])
 	# f.close()
 
 query = ' '.join(sys.argv[1:])
